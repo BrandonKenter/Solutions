@@ -4,8 +4,7 @@ Shortest path from a source to every other node in an undirected graph of weight
 
 '''
 BFS
-- Distance array 'dist' to store distances to each node
-- Visited set 'vis' to store visited nodes
+- Distance array 'dist' to store distances to each node and also acts as a visited set
 - Queue 'q' to store (node, distance to node) pairs
 '''
 class Solution:
@@ -16,7 +15,6 @@ class Solution:
             adj[v].append(u)
             
         dist = [float('inf')] * n
-        vis = set([src])
         dist[src] = 0
         q = deque([(src, 0)])
         
@@ -25,8 +23,7 @@ class Solution:
                 node, node_dist = q.popleft()
                 for nei in adj[node]:
                     nei_dist = node_dist + 1
-                    if nei not in vis:
-                        vis.add(nei)
+                    if dist[nei] == float('inf'):
                         q.append((nei, nei_dist))
                         dist[nei] = nei_dist
                         
