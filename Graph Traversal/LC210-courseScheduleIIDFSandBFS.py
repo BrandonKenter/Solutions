@@ -3,33 +3,33 @@ DFS
 '''
 class Solution:
     def findOrder(self, numCourses: int, prerequisites: List[List[int]]) -> List[int]:
-        premap = { i:[] for i in range(numCourses) }
+        adj = {i : [] for i in range(numCourses)}
         for crs, pre in prerequisites:
-            premap[crs].append(pre)
-         
-        v = set()
-        v_cur = set()
+            adj[crs].append(pre)
         
+        vis = set()
+        cur_vis = set()
+
         def dfs(crs):
-            if crs in v:
+            if crs in vis:
                 return True
-            if crs in v_cur:
+            if crs in cur_vis:
                 return False
             
-            v_cur.add(crs)
-            for pre in premap[crs]:
+            cur_vis.add(crs)
+            for pre in adj[crs]:
                 if not dfs(pre):
                     return False
-            v_cur.remove(crs)
-            v.add(crs)
-            res.append(crs)
+            cur_vis.remove(crs)
+            vis.add(crs)
+            ans.append(crs)
             return True
         
-        res = []
+        ans = []
         for crs in range(numCourses):
             if not dfs(crs):
                 return []
-        return res
+        return ans
 
 '''
 BFS (Kahn's)
