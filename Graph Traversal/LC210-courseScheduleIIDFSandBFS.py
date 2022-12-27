@@ -9,6 +9,7 @@ class Solution:
          
         v = set()
         v_cur = set()
+        
         def dfs(crs):
             if crs in v:
                 return True
