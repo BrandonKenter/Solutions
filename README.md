@@ -22,23 +22,33 @@ Most problems fit into many patterns and subpatterns, so there is no perfect fit
 
 
 # Graph
-###### Shortest Path
+## Shortest Path
 - BFS
 - Dijkstra's
 - Bellman-Ford
-###### Graph Traversal
+## Graph Traversal
 - BFS
 - DFS
+- 
 # Array
+
 # Stack
-###### Monotonic Stack
+## Monotonic Stack
 - Montonically Increasing
 - Monotonically Decreasing
+- 
 # String
+
 # Hash Map
+
 # Linked List
+
 # Left and Right Pointers
+
 # Fast and Slow Pointers
+
 # Sliding Window
+
 # Backtracking
+
 # Dynamic Programming
