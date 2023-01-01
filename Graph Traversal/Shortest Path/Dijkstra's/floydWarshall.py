@@ -2,7 +2,7 @@ class Solution:
 	def shortest_distance(self, matrix):
 		n = len(matrix)
 		
-		for i in range(n):
+	for i in range(n):
             for j in range(n):
                 if matrix[i][j] == -1:
                     matrix[i][j] = float('inf')
