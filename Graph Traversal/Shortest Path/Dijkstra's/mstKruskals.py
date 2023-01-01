@@ -1,6 +1,4 @@
 class Solution:
-    
-    #Function to find sum of weights of edges of the Minimum Spanning Tree.
     def spanningTree(self, V, adj):
         size = [1] * V
         par = [i for i in range(V)]
