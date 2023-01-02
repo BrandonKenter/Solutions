@@ -3,25 +3,28 @@ class Solution:
         if '0000' in deadends: return -1
 
         def get_children(lock):
-            children = []
+            res = []
             for i in range(4):
                 digit = str((int(lock[i]) + 1) % 10)
-                children.append(lock[:i] + digit + lock[i + 1:])
+                res.append(lock[:i] + digit + lock[i + 1:])
                 digit = str((int(lock[i]) - 1 + 10) % 10)
-                children.append(lock[:i] + digit + lock[i + 1:])
-            return children
+                res.append(lock[:i] + digit + lock[i + 1:])
+            return res
         
         q = deque()
-        q.append(['0000', 0])
+        q.append('0000')
         vis = set(deadends)
+        turns = 0
 
         while q:
-            lock, turns = q.popleft()
-            if lock == target:
-                return turns
-            
-            for child in get_children(lock):
-                if child not in vis:
-                    vis.add(child)
-                    q.append([child, turns + 1])
+            for i in range(len(q)):
+                lock = q.popleft()
+                if lock == target:
+                    return turns
+                
+                for child in get_children(lock):
+                    if child not in vis:
+                        vis.add(child)
+                        q.append(child)
+            turns += 1
         return -1
