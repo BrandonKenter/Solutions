@@ -1,10 +1,12 @@
 class Solution:
     def maxNumberOfBalloons(self, text: str) -> int:
-        b_counts = Counter("balloon")
-        t_counts = Counter(text)
-
-        min_count = float('inf')
-        for b_char, b_count in b_counts.items():
-            t_count = t_counts[b_char] // b_counts[b_char]
-            min_count = min(min_count, t_count)
-        return min_count
+        b = 'balloon'
+        t_counts = defaultdict(int)
+        for t in text:
+            if t in b:
+                t_counts[t] += 1
+        
+        b_counts = Counter('balloon')
+        for c, count in b_counts.items():
+            t_counts[c] = t_counts[c] // count
+        return min(t_counts.values())
