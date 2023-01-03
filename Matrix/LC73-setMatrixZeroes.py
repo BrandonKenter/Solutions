@@ -32,6 +32,3 @@ class Solution:
         if top_l == 0:
             for i in range(N):
                 matrix[0][i] = 0
-        
-        
-        
