@@ -40,6 +40,7 @@ Most problems fit into many patterns and subpatterns, so there is no perfect fit
 # String
 
 # Hash Map
+## General Notes
 
 # Linked List
 
