@@ -42,7 +42,6 @@ class Solution:
         
         for i in range(1, n):
             for w in range(amount + 1):
-                take = float('inf')
                 take = 1 + dp[i][w-coins[i]] if coins[i] <= w else float('inf')
                 not_take = 0 + dp[i-1][w]
                 dp[i][w] = min(take, not_take)
