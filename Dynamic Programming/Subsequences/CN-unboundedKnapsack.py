@@ -28,7 +28,7 @@ Tabulation
 '''
 class Solution:
     def unboundedKnapsack(self, weights: List[int], profits: List[int], n: int, maxWeight: int):
-        dp = [[-1 for col in range(w + 1)] for row in range(n)]
+        dp = [[-1 for col in range(maxWeight + 1)] for row in range(n)]
             
         for w in range(maxWeight + 1):
             if weights[0] <= w:
