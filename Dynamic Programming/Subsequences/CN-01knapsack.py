@@ -32,13 +32,13 @@ class Solution:
         
         for w in range(maxWeight + 1):
             if weights[0] <= w:
-                dp[0][w] = profits[0] * (w // weights[0])
+                dp[0][w] = profits[0]
             else:
                 dp[0][w] = 0
             
         for i in range(1, n):
             for w in range(maxWeight + 1):
-                take = profits[i] + dp[i][w-weights[i]] if weights[i] <= w else float('-inf')
+                take = profits[i] + dp[i-1][w-weights[i]] if weights[i] <= w else float('-inf')
                 not_take = 0 + dp[i-1][w]
                 dp[i][w] = max(take, not_take)
         return dp[n-1][maxWeight]
