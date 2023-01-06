@@ -10,7 +10,7 @@ def cutRod(prices, maxWeight):
         if w < 0:
             return float('-inf')
         if i == 0:
-            if i + 1 <= w:
+            if rod_len <= w:
                 return prices[i] * (w // rod_len)
             else:
                 return 0
