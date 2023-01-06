@@ -27,16 +27,14 @@ Returns the reference to the target clone directly to caller
 '''
 class Solution:
     def getTargetCopy(self, original: TreeNode, cloned: TreeNode, target: TreeNode) -> TreeNode:
-        def dfs(original, cloned):
-            if original is None:
+        def dfs(root, clone):
+            if not root:
                 return None
-            
-            if original == target:
-                return cloned
-            else:
-                left = dfs(original.left, cloned.left)
-                right = dfs(original.right, cloned.right)
-                if left: return left
-                elif right: return right
-                else: return None
+            if root == target:
+                return clone
+
+            l = dfs(root.left, clone.left)
+            r = dfs(root.right, clone.right)
+            if l: return l
+            if r: return r
         return dfs(original, cloned)
