@@ -16,7 +16,7 @@ class Solution:
             if dp[i][w] != -1:
                 return dp[i][w]
             
-            take = profits[i] + helper(i, w-weights[i])
+            take = profits[i] + helper(i-1, w-weights[i])
             not_take = 0 + helper(i-1, w)
             dp[i][w] = max(take, not_take)
             return dp[i][w]
