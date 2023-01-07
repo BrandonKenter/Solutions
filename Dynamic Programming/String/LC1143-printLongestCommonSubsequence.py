@@ -58,7 +58,7 @@ def lcs(text1, text2):
             i -= 1
             j -= 1
         else:
-            if i > 0 and dp[i-1][j] > dp[i][j-1]:
+            if dp[i-1][j] > dp[i][j-1]:
                 i = i - 1
             else:
                 j = j - 1
