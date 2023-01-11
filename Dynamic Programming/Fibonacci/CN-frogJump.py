@@ -20,7 +20,7 @@ def frogJump(n: int, heights: List[int]) -> int:
 Tabulation
 '''
 def frogJump(n: int, heights: List[int]) -> int:
-    dp = [-1] * n
+    dp = [0] * n
     dp[0], dp[1] = 0, abs(heights[1] - heights[0])
     
     for i in range(2, n):
