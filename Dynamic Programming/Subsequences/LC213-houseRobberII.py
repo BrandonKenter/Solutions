@@ -32,7 +32,7 @@ class Solution:
         
     def rob_helper(self, nums):
         n = len(nums)
-        dp = [-1] * n
+        dp = [0] * n
         dp[0], dp[1] = nums[0], max(nums[0], nums[1])
 
         for i in range(2, n):
