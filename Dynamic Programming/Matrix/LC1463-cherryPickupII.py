@@ -4,7 +4,7 @@ Memoization
 class Solution:
     def cherryPickup(self, grid: List[List[int]]) -> int:
         m, n = len(grid), len(grid[0])
-        dp = [[[-1 for z in range(n)] for y in range(n)] for x in range(m)]
+        dp = [[[0 for z in range(n)] for y in range(n)] for x in range(m)]
 
         def helper(i, j1, j2):
             if j1 < 0 or j2 < 0 or j1 > n-1 or j2 > n-1: return float('-inf')
