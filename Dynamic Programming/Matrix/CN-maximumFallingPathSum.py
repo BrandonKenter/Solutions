@@ -27,7 +27,7 @@ Tabulation
 '''
 def getMaxPathSum(matrix):
     m, n = len(matrix), len(matrix[0])
-    dp = [[-1 for col in range(n)] for row in range(m)]
+    dp = [[0 for col in range(n)] for row in range(m)]
     
     for j in range(n): dp[0][j] = matrix[0][j]
     
