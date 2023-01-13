@@ -24,8 +24,7 @@ def subsetSumToK(n, k, nums):
     dp = [[None for col in range(k+1)] for row in range(n)]
     
     for i in range(n): dp[i][0] = True
-    for k in range(1, k+1): dp[0][k] = False
-    if nums[0] <= k: dp[0][nums[0]] = True
+    for k in range(1, k+1): dp[0][k] = True if nums[0] == k else False
     
     for i in range(1, n):
         for k in range(1, k+1):
