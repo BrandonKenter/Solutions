@@ -21,7 +21,7 @@ def subsetSumToK(n, k, nums):
 Tabulation
 '''
 def subsetSumToK(n, k, nums):
-    dp = [[None for col in range(k + 1)] for row in range(n)]
+    dp = [[None for col in range(k+1)] for row in range(n)]
     
     for i in range(n): dp[i][0] = True
     for k in range(1, k+1): dp[0][k] = False
