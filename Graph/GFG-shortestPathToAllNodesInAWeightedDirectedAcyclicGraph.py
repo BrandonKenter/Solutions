@@ -7,14 +7,16 @@ class Solution:
         for u, v, w in edges:
             adj[u].append((v, w))
         
+        vis = set()
         def dfs(node):
+            vis.add(node)
             for nei_node, nei_weight in adj[node]:
-                dfs(nei_node)
+                if nei_node not in vis: dfs(nei_node)
             topo.append(node)
             
         topo = []
-        for i in range(n):
-            dfs(i)
+        for node in range(n):
+            if node not in vis: dfs(node)
         
         dist = [float('inf')] * n
         dist[0] = 0
@@ -49,23 +51,21 @@ class Solution:
                 if indegree[i] == 0:
                     q.append(i)
             
-            ans = []
             while q:
                 for i in range(len(q)):
                     cur = q.popleft()
                     vis.add(cur)
-                    ans.append(cur)
+                    topo.append(cur)
     
                     for nei in adj[cur]:
                         indegree[nei[0]] -= 1
                         if indegree[nei[0]] == 0:
                             q.append(nei[0])
-            return ans
         
         topo = []
-        for i in range(n):
-            if i not in vis:
-                topo.extend(bfs(i))
+        for node in range(n):
+            if node not in vis:
+                bfs(node)
         
         dist = [float('inf')] * n
         dist[0] = 0
