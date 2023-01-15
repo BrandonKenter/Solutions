@@ -9,7 +9,7 @@ class Solution:
         for right in range(len(s)):
             char_counts[s[right]] += 1
 
-            while len(char_counts) == 2:
+            while len(char_counts) > 2:
                 char_counts[s[left]] -= 1
                 if char_counts[s[left]] == 0:
                     char_counts.pop(s[left])
