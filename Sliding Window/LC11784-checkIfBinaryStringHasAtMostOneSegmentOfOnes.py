@@ -8,5 +8,5 @@ class Solution:
         for i in range(1, len(s)):
             if s[i] != s[i-1]:
                 segments += 1
-                if segments >= 2: return False
+                if segments == 2: return False
         return True
