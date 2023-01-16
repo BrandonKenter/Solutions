@@ -1,7 +1,6 @@
 class Solution:
     def maxVowels(self, s: str, k: int) -> int:
-        max_vowels = float('-inf')
-        cur_vowels = left = 0
+        max_vowels = cur_vowels = left = 0
         for right in range(len(s)):
             if s[right] in 'aeiou':
                 cur_vowels += 1
