@@ -12,7 +12,7 @@ Most solutions fit into multiple patterns and subpatterns, so there is no perfec
 - Tree height is log(N)
 - DFS traversals are O(log(N))
 
-## Traversals
+###### Traversals
 - Preorder (Root -> Left -> Right)
 - Inorder (Left -> Root -> Right)
 - Postorder (Left -> Right -> Root)
@@ -36,25 +36,37 @@ Text
 
 
 # Array
+## Overview
 
 # Stack
-## Monotonic Stack
+## Overview
+Text
+###### Monotonic Stack
 - Montonically Increasing
 - Monotonically Decreasing
-- 
+
+
+
 # String
+## Overview
 
 # Hash Map
-## General Notes
+## Overview
 
 # Linked List
+## Overview
 
 # Left and Right Pointers
+## Overview
 
 # Fast and Slow Pointers
+## Overview
 
 # Sliding Window
+## Overview
 
 # Backtracking
+## Overview
 
 # Dynamic Programming
+## Overview
