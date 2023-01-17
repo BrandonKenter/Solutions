@@ -3,10 +3,12 @@ Most solutions fit into multiple patterns and subpatterns, so there is no perfec
 # **Tree**
 
 ## Overview
-###### Binary Search Tree
+###### Representations
+- Binary Search Tree
 - Has binary search tree property
 - Inorder traversal visits nodes in increasing order
-###### Height-Balanced
+###### Properties
+- Height-balanced vs not height-balanced
 - Tree height is log(N)
 - DFS traversals are O(log(N))
 
@@ -18,7 +20,6 @@ Most solutions fit into multiple patterns and subpatterns, so there is no perfec
 - Reverse Inorder (Right -> Root -> Left
 - Reverse Postorder (Root -> Right -> Left
 - BFS
-
 
 
 # Graph
