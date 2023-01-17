@@ -2,7 +2,7 @@
 Most solutions fit into multiple patterns and subpatterns, so there is no perfect fit for each one. The general rule of thumb I follow is: if the solution fits a specific pattern, it goes into that pattern's folder. If there are many patterns that make up a solution (two pointer + sliding window), it will generally fall into the folder for the pattern that the approach focuses on or has a bigger reach in terms of importance for the solution. Ad hoc solutions that don't follow a particular popular pattern fall into their respective data structure folders.
 # **Tree**
 
-## Representations
+## Overview
 ###### Binary Search Tree
 - Has binary search tree property
 - Inorder traversal visits nodes in increasing order
@@ -22,11 +22,13 @@ Most solutions fit into multiple patterns and subpatterns, so there is no perfec
 
 
 # Graph
-## Shortest Path
+## Overview
+Text
+# Shorest Path Algorithms
 - BFS
 - Dijkstra's
 - Bellman-Ford
-## Graph Traversal
+# Graph Traversal Algorithms
 - BFS
 - DFS
 - 
