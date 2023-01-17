@@ -3,6 +3,7 @@ Most solutions fit into multiple patterns and subpatterns, so there is no perfec
 # **Tree**
 
 ## Overview
+Text
 ###### Representations
 - Binary Search Tree
 - Has binary search tree property
