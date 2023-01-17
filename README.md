@@ -24,14 +24,16 @@ Most solutions fit into multiple patterns and subpatterns, so there is no perfec
 # Graph
 ## Overview
 Text
-# Shorest Path Algorithms
+###### Shorest Path Algorithms
 - BFS
 - Dijkstra's
 - Bellman-Ford
-# Graph Traversal Algorithms
+###### Graph Traversal Algorithms
 - BFS
 - DFS
-- 
+
+
+
 # Array
 
 # Stack
