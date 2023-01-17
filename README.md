@@ -1,5 +1,5 @@
 # Data Structures and Patterns
-Most problems fit into many patterns and subpatterns, so there is no perfect fit for each problem. The general rule of thumb I follow is: if the problem fits a specifit pattern, it goes into that pattern's folder. If there are many patterns for a problem (two pointer + sliding window), it will fall into the folder for the pattern that the approach focuses on. Ad hoc problems that don't follow a particular popular pattern fall into their respective data structure folders.
+Most solutions fit into multiple patterns and subpatterns, so there is no perfect fit for each one. The general rule of thumb I follow is: if the solution fits a specific pattern, it goes into that pattern's folder. If there are many patterns that make up a solution (two pointer + sliding window), it will generally fall into the folder for the pattern that the approach focuses on or has a bigger reach in terms of importance for the solution. Ad hoc solutions that don't follow a particular popular pattern fall into their respective data structure folders.
 # **Tree**
 
 ## Representations
