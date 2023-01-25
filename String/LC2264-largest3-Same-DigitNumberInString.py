@@ -1,0 +1,9 @@
+class Solution:
+    def largestGoodInteger(self, num: str) -> str:
+        largest = ""
+        for i in range(len(num) - 2):
+            if num[i] == num[i+1] and num[i] == num[i+2]:
+                cur_good = num[i:i+3]
+                if cur_good > largest:
+                    largest = num[i] * 3
+        return largest
