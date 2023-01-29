@@ -7,7 +7,7 @@
 
 '''
 Reverse input lists
-O(M + N) time / O(N) space
+O(M + N) time / O(M + N) space
 '''
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
