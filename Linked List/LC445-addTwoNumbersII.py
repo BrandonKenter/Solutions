@@ -86,3 +86,62 @@ class Solution:
             prev = new_head
             new_head = tmp
         return prev
+
+
+'''
+No extra space
+O(M + N) time / O(1) space
+'''
+class Solution:
+    def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> Optional[ListNode]:
+        n1 = n2 = 0
+        cur = l1
+        while cur:
+            n1 += 1
+            cur = cur.next
+        
+        cur = l2
+        while cur:
+            n2 += 1
+            cur = cur.next
+        
+        # Process the longer list if it exists first until the lists are even
+        new_list = []
+        while n1 > n2:
+            new_list.append(l1.val)
+            l1 = l1.next
+            n1 -= 1
+        while n2 > n1:
+            new_list.append(l2.val)
+            l2 = l2.next
+            n2 -= 1
+
+        # Process the remaining elements of the two lists 
+        while l1 or l2:
+            l1_val = l1.val if l1 else 0
+            l2_val = l2.val if l2 else 0
+            sum_val = l1_val + l2_val
+            new_list.append(sum_val)
+            l1 = l1.next if l1 else None
+            l2 = l2.next if l2 else None
+        
+        # Create the new linked list
+        dummy = ListNode()
+        cur = dummy
+        carry, i = 0, len(new_list) - 1
+        while i >= 0 or carry:
+            val_sum = new_list[i] + carry if i >= 0 else carry
+            carry = val_sum // 10
+            val_sum %= 10
+            cur.next = ListNode(val_sum)
+            cur = cur.next
+            i -= 1
+
+        # Reverse the new linked list
+        new_head, prev = dummy.next, None
+        while new_head:
+            tmp = new_head.next
+            new_head.next = prev
+            prev = new_head
+            new_head = tmp
+        return prev
