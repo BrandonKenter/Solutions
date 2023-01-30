@@ -1,5 +1,6 @@
 '''
 DFS
+O(N) time / O(H) space
 '''
 class Solution:
     def treeDiameter(self, edges: List[List[int]]) -> int:
@@ -8,33 +9,33 @@ class Solution:
             adj[a].append(b)
             adj[b].append(a)
         
-        vis = set()
-        max_depth = 0
-        perimeter_node = -1
+        def dfs(src):
+            max_depth, peripheral = 0, None
+            vis = set()
 
-        def dfs(cur, cur_depth):
-            nonlocal max_depth, perimeter_node
-            if cur is None:
-                return
+            def helper(cur, cur_depth):
+                nonlocal max_depth, peripheral
+                if cur is None:
+                    return
+                
+                cur_depth += 1
+                vis.add(cur)
+                if cur_depth > max_depth:
+                    max_depth = cur_depth
+                    peripheral = cur
+                for nei in adj[cur]:
+                    if nei not in vis: helper(nei, cur_depth)
+            helper(src, 0)
+            return [max_depth, peripheral]
 
-            cur_depth += 1
-            vis.add(cur)
-            if cur_depth > max_depth:
-                max_depth = cur_depth
-                perimeter_node = cur
-
-            for nei in adj[cur]:
-                if nei not in vis:
-                    dfs(nei, cur_depth)
+        _, peripheral = dfs(0)
+        diam, _ = dfs(peripheral)
+        return diam - 1
         
-        dfs(0, 0)
-        vis.clear()
-        dfs(perimeter_node, 0)
-        return max_depth - 1
-
 
 '''
 BFS
+O(N) time / O(N) space
 '''
 class Solution:
     def treeDiameter(self, edges: List[List[int]]) -> int:
@@ -42,7 +43,7 @@ class Solution:
         for a, b in edges:
             adj[a].append(b)
             adj[b].append(a)
-        
+
         def bfs(src):
             vis = set()
             vis.add(src)
@@ -60,6 +61,6 @@ class Solution:
                 level += 1
             return [level, peripheral]
         
-        level, peripheral = bfs(0)
-        diam, peripheral_2 = bfs(peripheral)
+        _, peripheral = bfs(0)
+        diam, _ = bfs(peripheral)
         return diam - 1
