@@ -4,29 +4,6 @@
 #         self.val = val
 #         self.next = next
 '''
-Single pass
-O(N) time / O(1) space
-'''
-class Solution:
-    def plusOne(self, head: ListNode) -> ListNode:
-        dummy = ListNode(0, head)
-        not_nine, cur = dummy, head
-
-        while cur:
-            if cur.val != 9:
-                not_nine = cur
-            cur = cur.next
-
-        not_nine.val += 1
-        not_nine = not_nine.next
-
-        while not_nine:
-            not_nine.val = 0
-            not_nine = not_nine.next
-        return dummy if dummy.val else dummy.next
-
-
-'''
 Triple pass
 O(N) time / O(N) space
 '''
@@ -58,3 +35,26 @@ class Solution:
             prev = head
             head = tmp
         return prev
+
+
+'''
+Single pass
+O(N) time / O(1) space
+'''
+class Solution:
+    def plusOne(self, head: ListNode) -> ListNode:
+        dummy = ListNode(0, head)
+        not_nine, cur = dummy, head
+
+        while cur:
+            if cur.val != 9:
+                not_nine = cur
+            cur = cur.next
+
+        not_nine.val += 1
+        not_nine = not_nine.next
+
+        while not_nine:
+            not_nine.val = 0
+            not_nine = not_nine.next
+        return dummy if dummy.val else dummy.next
