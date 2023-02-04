@@ -1,8 +1,4 @@
 '''
-Shortest path from a source to every other node in an undirected graph of weights = 1.
-'''
-
-'''
 BFS
 - Distance array 'dist' to store distances to each node and also acts as a visited set
 - Queue 'q' to store (node, distance to node) pairs
