@@ -1,24 +1,24 @@
 class Solution:
     def searchRange(self, nums: List[int], target: int) -> List[int]:
 
-        def find_position(check_left):
-            l, r = 0, len(nums) - 1
-            while l <= r:
-                m = l + (r - l) // 2
-                val = nums[m]
+        def search(is_right):
+            left, right = 0, len(nums) - 1
+            while left <= right:
+                mid = left + (right - left) // 2
+                val = nums[mid]
                 if val == target:
-                    if check_left:
-                        res[0] = m
-                        r = m - 1
+                    if not is_right:
+                        pos[0] = mid
+                        right = mid - 1
                     else:
-                        res[1] = m
-                        l = m + 1
+                        pos[1] = mid
+                        left = mid + 1
                 elif val < target:
-                    l = m + 1
+                    left = mid + 1
                 else:
-                    r = m - 1
-
-        res = [-1, -1]
-        find_position(True)
-        find_position(False)
-        return res
+                    right = mid - 1
+            
+        pos = [-1, -1]
+        search(False)
+        search(True)
+        return pos
