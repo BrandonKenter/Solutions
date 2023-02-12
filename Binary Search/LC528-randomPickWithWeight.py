@@ -21,6 +21,12 @@ class Solution:
             else:
                 left = mid + 1
         return left
+    
+#         # Post-processing:
+#         # End Condition: left == right
+#         if left != len(nums) and nums[left] == target:
+#             return left
+#         return -1
 
 
 # Your Solution object will be instantiated and called as such:
