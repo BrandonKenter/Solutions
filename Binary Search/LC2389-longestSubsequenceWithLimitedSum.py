@@ -32,3 +32,25 @@ class Solution:
                     right = mid - 1
             answer.append(idx + 1)
         return answer
+
+
+class Solution:
+    def answerQueries(self, nums: List[int], queries: List[int]) -> List[int]:
+        nums.sort()
+        sums, prev = [], 0
+        for num in nums:
+            sums.append(num + prev)
+            prev += num
+        
+        answer = []
+        for query in queries:
+            left, right = 0, len(nums)
+            while left < right:
+                mid = (left + right) // 2
+                val = sums[mid]
+                if val > query:
+                    right = mid
+                else:
+                    left = mid + 1
+            answer.append(left)
+        return answer
