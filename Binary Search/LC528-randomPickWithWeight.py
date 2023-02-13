@@ -14,7 +14,9 @@ class Solution:
         while left < right:
             mid = (left + right) // 2
             mid_sum = self.pre_sums[mid]
-            if mid_sum >= target:
+            if mid_sum == target:
+                return mid
+            elif mid_sum > target:
                 right = mid
             else:
                 left = mid + 1
