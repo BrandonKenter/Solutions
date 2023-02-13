@@ -3,6 +3,8 @@
 
 # Template 2
 # Find minimal k where isBadVersion(k) is True
+# isCondition is "if k is a bad version"
+# F F T T T T T <- find first index that is TRUE
 class Solution:
     def firstBadVersion(self, n: int) -> int:
         left, right = 1, n
