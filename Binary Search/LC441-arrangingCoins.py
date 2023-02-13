@@ -1,16 +1,33 @@
+# Template 1
 class Solution:
     def arrangeCoins(self, n: int) -> int:
-        l, r = 0, n
-        res = 0
+        left, right, res = 0, n, 0
         
         while l <= r:
-            m = (l + r) // 2
-            coins = (m*(m+1)) / 2
-            if coins < n:
-                res = m
-                l = m + 1
-            elif coins > n:
-                r = m - 1
+            mid = (left + right) // 2
+            coins = (mid*(mid+1)) / 2
+            if coins == n:
+                return mid
+            elif coins < n:
+                res = mid
+                left = mid + 1
             else:
-                return m
+                right = mid - 1
         return res
+
+
+# Template 2
+# Same as Sqrt(x)
+class Solution:
+    def arrangeCoins(self, n: int) -> int:
+        left, right = 0, n
+        
+        # max k that satisfies condition(k)
+        while left < right:
+            mid = (left + right) // 2
+            coins = (mid*(mid+1)) / 2
+            if coins <= n:
+                left = mid + 1
+            else:
+                right = mid
+        return left - 1 if n != 1 else 1
