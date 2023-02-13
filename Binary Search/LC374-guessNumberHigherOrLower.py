@@ -5,6 +5,7 @@
 #          otherwise return 0
 # def guess(num: int) -> int:
 
+# Template 1
 class Solution:
     def guessNumber(self, n: int) -> int:
         left, right = 1, n
