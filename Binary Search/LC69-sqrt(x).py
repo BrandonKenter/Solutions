@@ -1,17 +1,20 @@
 # Template 2
+# Find minimal k where isCondition(k) is True
+# isCondition is "if mid * mid <= x"
+# F F T T T T T <- find first index that is TRUE
+# I think there can only be 2 T and we are looking for left T
+#   because square root can only be an int or a floating point
+#   number below the first number that takes mid * mid over
+#   our target integer x.
 class Solution:
     def mySqrt(self, x: int) -> int:
         left, right = 0, x
         while left < right:
             mid = left + (right - left) // 2
-            # Finding the minimal k satisfying condition(k) = True
-            # This is either the square root or the square root - 1
-            # because it can be directly equal, or it will be a floating
-            # point of the previous number, so it is rounded down.
-            if mid * mid <= x:
-                left = mid + 1
+            if mid * mid > x:
+                right = mid  
             else:
-                right = mid
+                left = mid + 1
         # Since we are ending to the right (last op is left = mid + 1)
         # we return left - 1.
         return left - 1
