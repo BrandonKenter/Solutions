@@ -1,4 +1,7 @@
 # Template 2
+# Find minimal k where isCondition(k) is True
+# isCondition is "if k bananas/hour can eat all bananas"
+# F F T T T T T <- find first index that is TRUE
 class Solution:
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
         min_k = len(piles)
@@ -15,7 +18,7 @@ class Solution:
                 left = cur_k + 1
         return left
 
-    
+
 # Template 1
 class Solution:
     def minEatingSpeed(self, piles: List[int], h: int) -> int:
