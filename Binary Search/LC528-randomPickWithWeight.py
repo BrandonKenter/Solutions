@@ -1,5 +1,7 @@
 from random import random
 
+# Template 2
+# Find minimal k where condition(k) is True
 class Solution:
 
     def __init__(self, w: List[int]):
@@ -14,19 +16,11 @@ class Solution:
         while left < right:
             mid = (left + right) // 2
             mid_sum = self.pre_sums[mid]
-            if mid_sum == target:
-                return mid
-            elif mid_sum > target:
+            if mid_sum >= target:
                 right = mid
             else:
                 left = mid + 1
         return left
-    
-#         # Post-processing:
-#         # End Condition: left == right
-#         if left != len(nums) and nums[left] == target:
-#             return left
-#         return -1
 
 
 # Your Solution object will be instantiated and called as such:
