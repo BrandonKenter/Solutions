@@ -3,13 +3,12 @@ class Solution:
         """
         Do not return anything, modify board in-place instead.
         """
-        # Use three sets to check the validity of each current state change 
-        # in constant time. 
+        # Initialize state collections
         rows = defaultdict(set)
         cols = defaultdict(set)
         squares = defaultdict(set)
         
-        # Insert each non-empty cell's value to its corresponding sets
+        # Seed state collections with current state
         for r in range(9):
             for c in range(9):
                 if board[r][c] != '.':
@@ -17,11 +16,13 @@ class Solution:
                     cols[c].add(int(board[r][c]))
                     squares[(r // 3, c // 3)].add(int(board[r][c]))
         
+        # Create backtracking method
+        # State parameters: 
+        #   - r where r is the row in the board
+        #   - c where c is the col in the board
         def backtrack(r, c):
-            # The "is valid state" base case is our first logic we add to 
-            # our backtracking methods. If this check for being valid is
-            # more than a couple lines, this is a good part of the method
-            # that can be moved to a helper method such as "is_valid_state()".
+            # Check if current state is a solution
+            # If so, return True because asked if ONE solution exists
             if r == 9:
                 return True
             
@@ -40,44 +41,40 @@ class Solution:
             # remove traces of this choice" as we see in the else block.
             if board[r][c] != '.':
                 return backtrack(new_r, new_c)
-            else:
-                # Since this cell is empty, we attempt to make a choice on this cell
-                # for every possible choice within the constraints. 
-                # The constraints are: 
-                #   1) Value must be 1 - 9
-                #   2) Each value must be unique for its respective row/col/square
-                for num in range(1, 10):
-                    # If this choice does not satisfy the constraints, we do not
-                    # explore this choice (so we do nothing and the algorithm 
-                    # continues to the next num in the for loop).
-                    if (
-                        num not in rows[r] and
-                        num not in cols[c] and 
-                        num not in squares[(r // 3, c // 3)]
-                    ):
-                        # If this choice does satisfy the constraints and we are 
-                        # in the if block, we explore this choice by adding the value
-                        # to its respective sets and updating the board.
-                        rows[r].add(num)
-                        cols[c].add(num)
-                        squares[(r // 3, c // 3)].add(num)
-                        board[r][c] = str(num)
-                        
-                        # Once we make our choice, we recurse on the next cell.
-                        # If this recursive call returns True (the base case returned
-                        # True in that case), then we can return True. Note this will
-                        # only return True if we are on the bottom-right cell as 
-                        # this was the last cell we had to verify in our constraints, 
-                        # so the row in the next call will be 9, which triggers the 
-                        # base case.
-                        if backtrack(new_r, new_c):
-                            return True
-                        
-                        # This choice didn't lead to a valid state, so remove the
-                        # decision so that we can make a different choice on the
-                        # next iteration.
-                        rows[r].remove(num)
-                        cols[c].remove(num)
-                        squares[(r // 3, c // 3)].remove(num)
-                        board[r][c] = '.'
+            
+            # State is valid (empty cell), so can proceed to make choice on this state
+            # Iterate through choices for current state
+            for num in range(1, 10):
+                # Check if choice meets constraints before attempting choice
+                # If choice does not meet constraints, continue (prune)
+                # Need to do this for this problem because adding to sets
+                # that already have this element would not be reflected in 
+                # the set, so we can't backtrack properly
+                if (
+                    num in rows[r] or
+                    num in cols[c] or 
+                    num in squares[(r // 3, c // 3)]
+                ):
+                    continue
+
+                # Choice meets constraints
+                # Reflect current choice in state collections
+                rows[r].add(num)
+                cols[c].add(num)
+                squares[(r // 3, c // 3)].add(num)
+                board[r][c] = str(num)
+                
+                # Recurse on next choice space of next state
+                # Add if condition and return value
+                if backtrack(new_r, new_c):
+                    return True
+                
+                # Clean up current choice (backtrack)
+                # r is automatically cleaned up because we are returning
+                # to the previous execution context with previous arg
+                rows[r].remove(num)
+                cols[c].remove(num)
+                squares[(r // 3, c // 3)].remove(num)
+                board[r][c] = '.'
+                
         backtrack(0, 0)
