@@ -29,7 +29,7 @@ class Solution:
             # Recurse on next choice space of next state
             backtrack(i + 1, cur_sum + candidates[i])
             # Clean up current choice (backtrack)
-            # cur_sum and i are automatically cleaned up because we are 
+            # i and cur_sum are automatically cleaned up because we are 
             # returning to the previous execution context with previous args
             combo.pop()
             
