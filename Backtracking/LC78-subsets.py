@@ -11,6 +11,7 @@ class Solution:
         def backtrack(i):
             # Check if state is a solution
             # If so, add to result collection
+            # Return to previous choice space
             if i == len(nums):
                 res.append(subset[:])
                 return
