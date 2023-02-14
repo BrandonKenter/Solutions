@@ -18,6 +18,7 @@ class Solution:
             # current matchstick
             for j in range(4):
                 # Base case check if the state using this choice is valid
+                # If this evaluates to False, we are pruning future unfruitful paths
                 if matchsticks[i] + sides[j] <= length:
                     # State for this choice is valid, so update state
                     sides[j] += matchsticks[i]
