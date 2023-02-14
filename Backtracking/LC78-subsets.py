@@ -4,6 +4,7 @@ class Solution:
         
         def backtrack(i):
             # State is a solution, so add it to solution collection
+            # Return to previous state
             if i == len(nums):
                 res.append(subset[:])
                 return
