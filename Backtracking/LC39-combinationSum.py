@@ -24,16 +24,16 @@ class Solution:
             # Reflect current choice in state collection
             # Current choice to include candidates[i]
             combo.append(candidates[i])
-            cur_sum + candidates[i]
             # Recurse on next choice space of next state
-            backtrack(i, cur_sum)
+            backtrack(i, cur_sum + candidates[i])
             # Clean up current choice (backtrack)
+            # i and cur_sum are automatically cleaned up because we are 
+            # returning to the previous execution context with previous args
             combo.pop()
-            cur_sum -= candidates[i]
             
             # Recurse on choice space of next state
             # Current choice to NOT include candidates[i]
             backtrack(i + 1, cur_sum)
-            
+
         backtrack(0, 0)
         return res
