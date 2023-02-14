@@ -1,40 +1,30 @@
-'''
-Use for loop to catch invalid states outside of constraints
-'''
 class Solution:
     def combine(self, n: int, k: int) -> List[List[int]]:
-        res, combo = [], []
+        # Initialize result collecction
+        res = []
+        # Initialize state collection
+        combo = []
         
-        def backtrack(prev):
+        # Create backtracking method
+        # State parameters: 
+        #   - i where i is the number in the range [1, n]
+        def backtrack(i):
+            # Check if current state is a solution
+            # If so, add to result collection
+            # Return to previous choice space
             if len(combo) == k:
                 res.append(combo[:])
                 return
             
-            for i in range(prev + 1, n + 1):
-                combo.append(i)
-                backtrack(i)
+            # State is valid, so can proceed to make choice on this state
+            # Iterate through choices for current state
+            for j in range(i, n + 1):
+                # Reflect current choice in state collection
+                combo.append(j)
+                # Recurse on next choice space of next state
+                backtrack(j + 1)
+                # Clean up current choice (backtrack)
                 combo.pop()
-        backtrack(0)
+
+        backtrack(1)
         return res
-
-
-'''
-Use base cases to catch invalid states outside of constraints
-'''
-class Solution:
-    def combine(self, n: int, k: int) -> List[List[int]]:
-        out, combo = [], []
-        
-        def backtrack(prev):
-            if prev == n and len(combo) == k:
-                out.append(combo[:])
-                return
-            if prev == n or len(combo) == k + 1:
-                return
-            
-            combo.append(prev + 1)
-            backtrack(prev + 1)
-            combo.pop()
-            backtrack(prev + 1)
-        backtrack(0)
-        return out
