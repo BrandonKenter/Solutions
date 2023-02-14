@@ -5,7 +5,7 @@ class Solution:
         # Initialize state collection
         subset = []
         
-        # Create backtrack method
+        # Create backtracking method
         # State parameters: 
         #   - i where i is the index of the nums array
         def backtrack(i):
