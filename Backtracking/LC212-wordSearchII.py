@@ -1,3 +1,5 @@
+# Does not have the optimization, so all test cases won't pass
+# This is a interview-friendly solution (optimizations won't be expected in an interview)
 class TrieNode():
     def __init__(self):
         self.children = {}
@@ -21,47 +23,44 @@ class Solution:
         cur_word = []
 
         # Initialize the trie with the list of words
+        root = TrieNode()
         for word in words:
-            root = TrieNode()
-            for word in words:
-                root.add_word(word)
+            root.add_word(word)
 
         def backtrack(r, c, cur):
-            # Current state is not valid, so return
-            if(
+            # Base case to check if state is valid
+            if (
                 r not in range(m) or 
                 c not in range(n) or 
                 (r, c) in vis or
                 board[r][c] not in cur.children
             ):
                 return
-            
-            # Current state is valid, so our choice is to add it to our path.
-            # Note that theres a distinction between a state being valid and
-            # a state being a solution. A solution state is inherently valid, 
-            # but the reverse is not inherently true. So the "is valid state" 
-            # check is done in the base case, and the "is solution" check is 
-            # done here. 
+
+            # State is valid, so update state
             vis.add((r, c))
             cur_word.append(board[r][c])
             cur = cur.children[board[r][c]]
+
+            # Check if state is a solution and add to collection if so
+            # Do not return because we are asked for ALL solutions
             if cur.end:
                 res.add("".join(cur_word))
             
-            # Explore all future candidates. The reason we don't return early
-            # in this problem (some problems have a statement like: if backtrack() 
-            # return True) is because we are looking for ALL words that exist in 
-            # the board. So when we see that cur.end is True, we found only one 
-            # word. So we still continue with recursion.
+            # Make next choices from the current state by calling backtrack for every
+            # adjacent cell
             for dr, dc in directions:
                 nei_r, nei_c = dr + r, dc + c
                 backtrack(nei_r, nei_c, cur)
+
             # Clean up the choice
             vis.remove((r, c))
             cur_word.pop()
         
-        # We have to call backtrack on every cell to explore all possible states
+        # Call backtrack on every cell whose char is a child of root to explore 
+        # all possible states
         for r in range(m):
             for c in range(n):
-                backtrack(r, c, root)
+                if board[r][c] in root.children:
+                    backtrack(r, c, root)
         return list(res)
