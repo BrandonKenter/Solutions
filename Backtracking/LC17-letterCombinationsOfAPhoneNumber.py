@@ -10,25 +10,32 @@ class Solution:
                         '8' : 'tuv',
                         '9' : 'wxyz'
                         }
-        res, combo = [], []
+        # Initialize result collection
+        res = []
+        # Initialzie state collection
+        combo = []
 
+        # Create backtracking method
+        # State parameters:
+        #   - i where i is the index of the digits string
         def backtrack(i):
-            # State is a solution, so add it to solution collection
-            # Return to previous state
+            # Check if state is a solution
+            # If so, add to result collection
+            # Return to previous choice space
             if i == len(digits):
                 res.append("".join(combo[:]))
                 return
             
-            # Iterate through next choices for current state
+            # State is valid, so can proceed to make choice on this state
+            # Iterate through choices for current state
             for char in dig_to_chars[digits[i]]:
-                # State is inherently valid, so update state
+                # Reflect current choice in state collection
                 combo.append(char)
-                
-                # Make next choice from current state by calling 
-                # backtrack on next position in the digits string
+
+                ## Recurse on next choice space of next state
                 backtrack(i+1)
 
-                # Clean up decision
+                # Clean up current choice (backtrack)
                 combo.pop()
         
         backtrack(0)
