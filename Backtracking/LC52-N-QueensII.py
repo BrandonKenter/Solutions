@@ -21,6 +21,7 @@ class Solution:
             # Iterate through choices for current state
             for c in range(n):
                 # Check if choice meets constraints before attempting choice
+                # If choice does not meet constraints, continue (prune)
                 # Need to do this for this problem because adding to sets
                 # that already have this element would not be reflected in 
                 # the set, so we can't backtrack properly
@@ -46,6 +47,6 @@ class Solution:
                 col.remove(c)
                 posDiag.remove(r + c)
                 negDiag.remove(r - c)
-                
+
         backtrack(0)
         return res
