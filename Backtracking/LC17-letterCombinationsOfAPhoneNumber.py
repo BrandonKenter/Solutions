@@ -13,13 +13,22 @@ class Solution:
         res, combo = [], []
 
         def backtrack(i):
+            # State is a solution, so add it to solution collection
+            # Return to previous state
             if i == len(digits):
                 res.append("".join(combo[:]))
                 return
             
+            # Iterate through next choices for current state
             for char in dig_to_chars[digits[i]]:
+                # State is inherently valid, so update state
                 combo.append(char)
+                
+                # Make next choice from current state by calling 
+                # backtrack on next position in the digits string
                 backtrack(i+1)
+
+                # Clean up decision
                 combo.pop()
         
         backtrack(0)
