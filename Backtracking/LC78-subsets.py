@@ -3,17 +3,21 @@ class Solution:
         res, subset = [], []
         
         def backtrack(i):
-            # Current state is a solution, so append to res
+            # State is a solution, so add it to solution collection
             if i == len(nums):
                 res.append(subset[:])
                 return
             
-            # Decision to include nums[i]
+            # Make next choice from current state by calling backtrack
+            # on i + 1
             subset.append(nums[i])
             backtrack(i+1)
+            
+            # Clean up decision
             subset.pop()
             
-            # Decision to NOT include nums[i]
+            # Make next choice from current state by calling backtrack
+            # on i + 1 WITHOUT nums[i]
             backtrack(i+1)
         backtrack(0)
         return res
