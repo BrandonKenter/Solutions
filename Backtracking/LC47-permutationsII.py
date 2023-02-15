@@ -1,11 +1,12 @@
 class Solution:
     def permuteUnique(self, nums: List[int]) -> List[List[int]]:
+        nums.sort()
         # Initialize result collection
         res = []
         # Initialize state collection
         perm = []
         used = [False] * len(nums)
-        nums.sort()  # sort the input array
+        
         
         # Create backtracking method
         def backtrack():
