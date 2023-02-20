@@ -1,36 +1,46 @@
 '''
 Memoization
 '''
-def lcs(text1, text2):
-    m, n = len(text1), len(text2)
-    dp = [[-1 for col in range(n)] for row in range(m)]
+class Solution:
+    def shortestCommonSupersequence(self, s: str, t: str) -> str:
+        m, n = len(s), len(t)
+        dp = [[-1 for col in range(n)] for row in range(m)]
 
-    def helper(i, j):
-        if i < 0 or j < 0:
-            return 0
-        if dp[i][j] != -1:
-            return dp[i][j]
+        def helper(i, j):
+            if i < 0 or j < 0:
+                return 0
+            if dp[i][j] != -1:
+                return dp[i][j]
 
-        if text1[i] == text2[j]:
-            dp[i][j] = 1 + helper(i-1, j-1)
-        else:
-            dp[i][j] = max(helper(i-1, j), helper(i, j-1))
-        return dp[i][j]
-    helper(m-1, n-1)
-        
-    i, j = m-1, n-1
-    ans = []
-    while i >= 0 and j >= 0:
-        if text1[i] == text2[j]:
-            ans.append(text1[i])
-            i -= 1
-            j -= 1
-        else:
-            if i > 0 and dp[i-1][j] > dp[i][j-1]:
-                i = i - 1
+            if s[i] == t[j]:
+                dp[i][j] = 1 + helper(i-1, j-1)
             else:
-                j = j - 1
-    return "".join(ans)[::-1]
+                dp[i][j] = max(helper(i-1, j), helper(i, j-1))
+            return dp[i][j]
+        helper(m-1, n-1)
+            
+        i, j = m-1, n-1
+        ans = []
+        while i >= 0 and j >= 0:
+            if s[i] == t[j]:
+                ans.append(s[i])
+                i -= 1
+                j -= 1
+            else:
+                if i > 0 and dp[i-1][j] > dp[i][j-1]:
+                    ans.append(s[i])
+                    i = i - 1
+                else:
+                    ans.append(t[j])
+                    j = j - 1
+
+        while i >= 0:
+            ans.append(s[i])
+            i -= 1
+        while j >= 0:
+            ans.append(t[j])
+            j -= 1
+        return "".join(ans)[::-1]
     
 
 '''
