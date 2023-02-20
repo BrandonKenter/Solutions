@@ -1,42 +1,8 @@
 '''
-Memoization 
-Doesn't pass all LC tests 
-Test case nums1 = [0, 0, 0, 1, 0], nums2 = [0, 0, 1, 0, 0] expects answer = 5
-This is an incorrect test case because subarrays have to be contiguous elements
-So I can't try all test cases for this solution
-But the solution nomatch case is flawed anyway
-'''
-class Solution:
-    def findLength(self, nums1: List[int], nums2: List[int]) -> int:
-        m, n = len(nums1), len(nums2)
-        dp = [[-1 for j in range(n)] for i in range(m)]
-        
-        def helper(i, j):
-            if i < 0 or j < 0:
-                return 0
-            if dp[i][j] != -1:
-                return dp[i][j]              
-            
-            if nums1[i] == nums2[j]:
-                match = 1 + helper(i-1, j-1)
-                dp[i][j] = match
-                return dp[i][j]
-            else:
-                nomatch = min(helper(i,j-1), helper(i-1, j))
-                dp[i][j] = nomatch
-                return dp[i][j]
-            
-        helper(m-1, n-1)
-        maxi = 0
-        for i in range(m):
-            for j in range(n):
-                maxi = max(maxi, dp[i][j])
-        return maxi
-
-    
-'''
 Memoization
 Passes test cases but I have absolutely no idea how the no match logic works
+I think we have the match/nomatch recursive calls outside the if/else condition so
+    we don't overwrite dp[i][j]
 '''
 class Solution:
     def findLength(self, nums1: List[int], nums2: List[int]) -> int:
@@ -48,10 +14,10 @@ class Solution:
                 return 0
             if dp[i][j] != -1:
                 return dp[i][j]         
-                
+            
+            match = 1 + helper(i-1, j-1)
             nomatch = min(helper(i,j-1), helper(i-1, j), 0)
             if nums1[i] == nums2[j]:
-                match = 1 + helper(i-1, j-1)
                 dp[i][j] = match
                 return dp[i][j]
             else:
