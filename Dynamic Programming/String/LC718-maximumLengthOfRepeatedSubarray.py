@@ -1,5 +1,10 @@
 '''
-Memoization
+Memoization 
+Doesn't pass all LC tests 
+Test case nums1 = [0, 0, 0, 1, 0], nums2 = [0, 0, 1, 0, 0] expects answer = 5
+This is an incorrect test case because subarrays have to be contiguous elements
+So I can't try all test cases for this solution
+But the solution nomatch case is flawed anyway
 '''
 class Solution:
     def findLength(self, nums1: List[int], nums2: List[int]) -> int:
