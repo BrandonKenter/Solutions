@@ -1,5 +1,6 @@
 '''
 Memoization
+Not recommended to learn
 '''
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
@@ -20,6 +21,7 @@ class Solution:
 '''
 Tabulation
 2D - O(N*N) space
+Not recommended to learn
 '''
 class Solution:
     def lengthOfLIS(self, nums: List[int]) -> int:
