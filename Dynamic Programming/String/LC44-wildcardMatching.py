@@ -16,9 +16,9 @@ class Solution:
                 dp[i][j] = helper(i-1, j-1)
                 return dp[i][j]
             elif t[j] == '*':
-                take_i = helper(i-1, j) # don't match * with j (discard *)
-                take_j = helper(i, j-1) # match * with j but don't decrement i (discard j and don't discard *)
-                dp[i][j] = take_i or take_j
+                take = helper(i-1, j)  # match * with i but don't decrement j (discard i and don't discard */j)
+                skip = helper(i, j-1)  # don't match * with i and decrement j (discard */j)
+                dp[i][j] = take or skip
                 return dp[i][j]
             else:
                 return False
@@ -42,9 +42,9 @@ class Solution:
                 if s[i-1] == t[j-1] or t[j-1] == '?':
                     dp[i][j] = dp[i-1][j-1]
                 elif t[j-1] == '*':
-                    take_i = dp[i-1][j] # don't match * with j (discard *)
-                    take_j = dp[i][j-1] # match * with j but don't decrement i (discard j and don't discard *)
-                    dp[i][j] = take_i or take_j
+                    take = dp[i-1][j] # match * with i but don't decrement j (discard i and don't discard */j)
+                    skip = dp[i][j-1] # don't match * with i and decrement j (discard */j)
+                    dp[i][j] = take or skip
                 else:
                     dp[i][j] = False
         return dp[m][n]
