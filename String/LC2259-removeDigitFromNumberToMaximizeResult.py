@@ -8,7 +8,5 @@ class Solution:
         for i in range(len(number)):
             if number[i] == digit:
                 cur_count += 1
-                if cur_count == count:
-                    return number[:i] + number[i+1:]
-                elif int(number[i+1]) > int(number[i]):
+                if cur_count == count or int(number[i+1]) > int(number[i]):
                     return number[:i] + number[i+1:]
