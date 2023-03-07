@@ -25,6 +25,5 @@ class Solution:
             res.extend(reversed([str(n) for n in even_nums]))
         elif odd_nums:
             res.extend(reversed([str(n) for n in odd_nums]))
-        print(res)
         return int("".join(res))
         
