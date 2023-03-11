@@ -9,3 +9,4 @@ class Solution:
                 return i
             l_sum += nums[i]
         return -1
+    
