@@ -11,3 +11,4 @@ class Solution:
                 s = 0
                 start = i + 1
         return start
+    

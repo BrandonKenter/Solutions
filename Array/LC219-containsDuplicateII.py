@@ -21,3 +21,4 @@ class Solution:
                 if nums[i] == nums[j] and j - i <= k:
                     return True
         return False
+    

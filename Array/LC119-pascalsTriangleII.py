@@ -7,3 +7,4 @@ class Solution:
                 cur_row[j] = last_row[j-1] + last_row[j]
             last_row = cur_row
         return last_row
+    

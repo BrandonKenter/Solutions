@@ -9,3 +9,4 @@ class Solution:
                 new[j] = prev[j - 1] + prev[j]
             res.append(new)
         return res
+    
