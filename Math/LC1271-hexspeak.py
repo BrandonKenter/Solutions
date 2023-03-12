@@ -13,7 +13,6 @@ class Solution:
                     res.append('I')
             else:
                 if c.upper() not in letters:
-
                     return "ERROR"
                 else:
                     res.append(c.upper())
