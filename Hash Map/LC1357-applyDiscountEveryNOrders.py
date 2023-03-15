@@ -1,3 +1,7 @@
+from ast import List
+from collections import defaultdict
+
+
 class Cashier:
 
     def __init__(self, n: int, discount: int, products: List[int], prices: List[int]):
