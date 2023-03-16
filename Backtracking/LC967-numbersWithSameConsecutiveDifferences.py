@@ -74,7 +74,8 @@ class Solution:
         # Create the backtracking method
         # State parameters:
         #   - i where i is the index of the current combination
-        def backtrack(i, combo, div):
+        #   - combo where combo is the current combination
+        def backtrack(i, combo):
             # Check if state is a solution
             # If so, add tto result collection
             # Return to previous choice space
@@ -92,7 +93,7 @@ class Solution:
                     # Choice meets constraints
                     # Reflect current choice in state collection
                     # Recurse on next choice space of next state
-                    backtrack(i + 1, j, div * 10)
+                    backtrack(i + 1, j)
                     # Clean up current choice (backtrack)
                     # all params are automatically cleaned up because we are returning
                     #   to the previous execution context with previous args
@@ -101,7 +102,7 @@ class Solution:
                     # Choice meets constraints
                     # Reflect current choice in state collection
                     # Recurse on next choice space of next state
-                    backtrack(i + 1, combo * 10 + j, div * 10)
+                    backtrack(i + 1, combo * 10 + j)
                     # Clean up current choice (backtrack)
                     # all params are automatically cleaned up because we are returning
                     #   to the previous execution context with previous args
@@ -109,7 +110,7 @@ class Solution:
                     # Choice meets constraints
                     # Reflect current choice in state collection
                     # Recurse on next choice space of next state
-                    backtrack(i + 1, combo * 10 + j, div * 10)
+                    backtrack(i + 1, combo * 10 + j)
                     # Clean up current choice (backtrack)
                     # all params are automatically cleaned up because we are returning
                     #   to the previous execution context with previous args
@@ -117,6 +118,6 @@ class Solution:
         # Initialize result colleciton
         res = []
         # Call backtrack method with the starting state parameteters
-        backtrack(0, 0, 1)
+        backtrack(0, 0)
         return res
                 
