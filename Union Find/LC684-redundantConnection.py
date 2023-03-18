@@ -1,28 +1,34 @@
+class UnionFind:
+    def __init__(self, size):
+        self.root = [i for i in range(size + 1)]
+        self.rank = [1] * (size + 1)
+
+    def find(self, x):
+        if x == self.root[x]:
+            return x
+        self.root[x] = self.find(self.root[x])
+        return self.root[x]
+
+    def union(self, x, y):
+        root_x, root_y = self.find(x), self.find(y)
+
+        if self.rank[root_x] > self.rank[root_y]:
+            self.root[root_y] = root_x
+        elif self.rank[root_y] > self.rank[root_x]:
+            self.root[root_x] = root_y
+        else:
+            self.root[root_y] = root_x
+            self.rank[root_x] += 1
+
+    def is_connected(self, x, y):
+        return self.find(x) == self.find(y)
+
+
 class Solution:
     def findRedundantConnection(self, edges: List[List[int]]) -> List[int]:
-        par = [i for i in range(len(edges) + 1)]
-        size = [1] * (len(edges) + 1)
-        
-        def find(i):
-            if i == par[i]:
-                return i
-            par[i] = find(par[i])
-            return par[i]
-
-        def union(x, y):
-            px, py = find(x), find(y)
-
-            if px == py:
-                return True
-
-            if size[px] > size[py]:
-                par[py] = px
-                size[px] += size[py]
-            else:
-                par[px] = py
-                size[py] += size[px]
-            return False
-        
+        uf = UnionFind(len(edges))
         for a, b in edges:
-            if union(a, b): return [a, b]
-        return []
+            if uf.is_connected(a, b):
+                return [a, b]
+            uf.union(a, b)
+        
