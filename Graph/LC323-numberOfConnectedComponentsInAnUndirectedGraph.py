@@ -58,6 +58,7 @@ class Solution:
 
 '''
 Union-Find
+O(V + E * α(N)) time / O(V) space
 '''
 class UnionFind:
     def __init__(self, size):
