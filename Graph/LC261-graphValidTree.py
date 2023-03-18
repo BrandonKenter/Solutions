@@ -1,4 +1,26 @@
 '''
+DFS
+O(N) time / O(N) space
+'''
+class Solution:
+    def validTree(self, n: int, edges: List[List[int]]) -> bool:
+        adj = {i : [] for i in range(n)}
+        for a, b in edges:
+            adj[a].append(b)
+            adj[b].append(a)
+        
+        vis = set()
+        def dfs(cur, prev):
+            vis.add(cur)
+            for nei in adj[cur]:
+                if nei != prev:
+                    if nei in vis: return False
+                    if not dfs(nei, cur): return False
+            return True
+        return dfs(0, -1) and len(vis) == n
+
+
+'''
 BFS
 O(N) time / O(N) space
 '''
@@ -22,28 +44,6 @@ class Solution:
                         q.append((nei, cur))
                         vis.add(nei)
         return True if len(vis) == n else False
-
-
-'''
-DFS
-O(N) time / O(N) space
-'''
-class Solution:
-    def validTree(self, n: int, edges: List[List[int]]) -> bool:
-        adj = {i : [] for i in range(n)}
-        for a, b in edges:
-            adj[a].append(b)
-            adj[b].append(a)
-        
-        vis = set()
-        def dfs(cur, prev):
-            vis.add(cur)
-            for nei in adj[cur]:
-                if nei != prev:
-                    if nei in vis: return False
-                    if not dfs(nei, cur): return False
-            return True
-        return dfs(0, -1) and len(vis) == n
 
 
 '''
