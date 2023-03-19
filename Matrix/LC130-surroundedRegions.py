@@ -77,7 +77,6 @@ class Solution:
                             vis.add((nei_r, nei_c))
                             q.append((nei_r, nei_c))
                             
-
         # 'O' -> 'T' for 'O' connected to edges
         for r in range(m):
             for c in range(n):
