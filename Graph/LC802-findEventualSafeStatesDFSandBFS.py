@@ -3,60 +3,56 @@ DFS
 '''
 class Solution:
     def eventualSafeNodes(self, graph: List[List[int]]) -> List[int]:
-        n = len(graph)
-        adj = {i : [] for i in range(n)}
-        for u in range(n):
-            for v in graph[u]:
-                adj[u].append(v)
-        
-        cur_vis = set()
         vis = set()
+        cur_vis = set()
 
         def dfs(cur):
-            if cur in vis:
-                return True
             if cur in cur_vis:
                 return False
-            
+            if cur in vis:
+                return True
+
             cur_vis.add(cur)
-            for nei in adj[cur]:
-                if not dfs(nei): return False
-            cur_vis.remove(cur)
+            for nei in graph[cur]:
+                if not dfs(nei):
+                    return False
             vis.add(cur)
+            cur_vis.remove(cur)
             return True
-        
-        ans = []
-        for i in range(n):
-            if dfs(i): ans.append(i)
-        return ans
+            
+        safe = []
+        for node in range(len(graph)):
+            if dfs(node):
+                safe.append(node)
+        return safe
+
 
 '''
-BFS (Kahn's)
+BFS
 '''
 class Solution:
     def eventualSafeNodes(self, graph: List[List[int]]) -> List[int]:
-        n = len(graph)
-        adj = {i : [] for i in range(n)}
-        indegree = [0] * n
-        for u in range(n):
+        adj = {i:[] for i in range(len(graph))}
+        indegree = [0] * len(graph)
+        for u in range(len(graph)):
             for v in graph[u]:
                 adj[v].append(u)
                 indegree[u] += 1
         
         q = deque()
-        for i in range(n):
-            if indegree[i] == 0:
-                q.append(i)
+        for node in range(len(indegree)):
+            if indegree[node] == 0:
+                q.append(node)
         
-        ans = []
+        res = []
         while q:
             for i in range(len(q)):
                 cur = q.popleft()
-                ans.append(cur)
+                res.append(cur)
 
                 for nei in adj[cur]:
                     indegree[nei] -= 1
                     if indegree[nei] == 0:
                         q.append(nei)
-
-        return sorted(ans)
+        return sorted(res)
+    
