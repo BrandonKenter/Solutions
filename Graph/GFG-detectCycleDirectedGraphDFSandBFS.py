@@ -44,10 +44,7 @@ class Solution:
                 cur = q.popleft()
                 cnt += 1
                 
-                # Added cur to topo sort, so can decrement indegree of neighbors
                 for nei in adj[cur]:
                     indegree[nei] -= 1
-                    if indegree[nei] == 0: q.append(nei)
-                    
-        if cnt == V: return False
-        return True
+                    if indegree[nei] == 0: q.append(nei)         
+        return cnt != V
