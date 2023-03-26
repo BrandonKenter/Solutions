@@ -1,11 +1,6 @@
-a = [2, 3, 4, 5, 6, 7]
-
-target = 8
-left, right = 0, len(a)
-while left < right:
-    mid = (left + right) // 2
-    if a[mid] >= target:
-        right = mid
-    else:
-        left = mid + 1
-print(left)
+i = 0
+s = 0
+while s <= 10**7:
+    s += 3 ** i
+    i += 1
+print(i)
