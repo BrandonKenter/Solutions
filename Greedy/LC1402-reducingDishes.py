@@ -1,8 +1,6 @@
 class Solution:
     def maxSatisfaction(self, satisfaction: List[int]) -> int:
-        prefix_sum = 0
-        cur_sum = 0
-        max_sum = 0
+        prefix_sum = cur_sum = max_sum = 0
         
         for num in sorted(satisfaction, reverse=True):
             prefix_sum += num
