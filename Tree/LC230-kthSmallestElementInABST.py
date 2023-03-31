@@ -25,6 +25,36 @@ class Solution:
         kth = None
         dfs(root)
         return kth
+    
+    
+'''
+Recursive
+Added return early logic (return when answer found)
+Left and right return values instead of base case
+'''
+class Solution:
+    def kthSmallest(self, root: Optional[TreeNode], k: int) -> int:
+        self.v=0
+        
+        def inorder(node):
+            if not node:
+                return
+            
+            # left subtree
+            l = inorder(node.left)
+            if l is not None:
+                return l
+            # current node
+            self.v+=1
+            if self.v==k:
+                return node.val
+            
+            # right subtree
+            r = inorder(node.right)
+            if r is not None:
+                return r
+        
+        return inorder(root)
 
 
 '''
