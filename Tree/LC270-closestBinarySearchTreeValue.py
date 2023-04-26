@@ -14,7 +14,7 @@ class Solution:
             if cur is None:
                 return
             
-            if abs(target - cur.val) < closest_dif:
+            if abs(target - cur.val) <= closest_dif:
                 closest_dif = abs(target - cur.val)
                 closest_val = cur.val
             
