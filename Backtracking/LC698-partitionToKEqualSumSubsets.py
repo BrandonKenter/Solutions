@@ -1,4 +1,4 @@
-# Approach that iterates through each subset indexfor each recursive call
+# Approach that iterates through each subset index for each recursive call
 # Does not have the optimization, so all test cases won't pass
 # This is a interview-friendly solution (optimizations won't be expected in an interview)
 class Solution:
