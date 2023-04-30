@@ -10,6 +10,20 @@ class Solution:
         max2 = -1 * heapq.heappop(max_h)
         return (max1 - 1) * (max2 - 1)
 
+    
+'''
+Min Heap
+O(Nlog(2)) time / O(1) space
+'''
+class Solution:
+    def maxProduct(self, nums: List[int]) -> int:
+        min_h = []
+        for num in nums:
+            heappush(min_h, num)
+            if len(min_h) > 2:
+                heappop(min_h)
+        return (min_h[0] - 1) * (min_h[1] - 1)
+
 
 '''
 Variables for two highest elements 
@@ -25,3 +39,4 @@ class Solution:
             elif num >= max2:
                 max2 = num
         return (max1 - 1) * (max2 - 1)
+    
