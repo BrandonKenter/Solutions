@@ -1,19 +1,16 @@
 class Solution:
     def printVertically(self, s: str) -> List[str]:
         s = s.split(" ")
-        maxi = 0
-        for word in s:
-             maxi = max(maxi, len(word))
-        for i in range(len(s)):
-            s[i] = s[i] + " " * (maxi - len(s[i]))
+        maxi = max([len(word) for word in s])
         
         res = []
-        for i in range(maxi):
+        for c in range(maxi):
             word = []
-            for j in range(len(s)):
-                word.append(s[j][i])
-            w = "".join(word)
-            w = w.rstrip()
-            res.append(w)
+            for r in range(len(s)):
+                if c >= len(s[r]):
+                    word.append(" ")
+                else:
+                    word.append(s[r][c])
+            res.append("".join(word).rstrip())
         return res
         
