@@ -49,9 +49,6 @@ class Solution:
             if len(combo) == n:
                 res += 1
                 return
-            # Check if state is valid
-            if i == len(vowels):
-                return
 
             for j in range(i, len(vowels)):
                 combo.append(vowels[i])
@@ -60,3 +57,4 @@ class Solution:
 
         backtrack(0)
         return res
+      
