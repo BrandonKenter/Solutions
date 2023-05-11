@@ -1,110 +1,22 @@
-# Approach that iterates through each subset index for each recursive call
-# Does not have the optimization, so all test cases won't pass
-# This is a interview-friendly solution (optimizations won't be expected in an interview)
 class Solution:
-    def canPartitionKSubsets(self, arr: List[int], k: int) -> bool:
-        arr.sort(reverse=True)
-        n, total_array_sum = len(arr), sum(arr)
-        target_sum = total_array_sum // k
-        if total_array_sum % k != 0:
+    def canPartitionKSubsets(self, nums: List[int], k: int) -> bool:
+        total_sum = sum(nums)
+        target_sum = total_sum / k
+        if total_sum % k:
             return False
+        k_sums = [0 for i in range(k)]
+        nums.sort(reverse=True)
 
-        # Initialize state collection
-        subsets = [[] for i in range(k)]
-
-        # Create backtracking method
-        # State parameters: 
-        #   - i where i is the current index of the input collection
         def backtrack(i):
-            # Check if current state is a solution
-            # If so, return True because asked if ONE solution exists
-            if i == len(arr):
+            if i == len(nums):
                 return True
-
-            # State is valid, so can proceed to make choice on this state
-            # Iterate through choices for current state
-            for j in range(k):
-                # Check if choice meets constraints before attempting choice
-                # If choice does not meet constraints, continue (prune)
-                if (
-                    arr[i] + sum(subsets[j]) > target_sum
-                ):
-                    continue
-
-                # Choice meets constraints
-                # Reflect current choice in state collections
-                subsets[j].append(arr[i])
-                # Recurse on next choice space of next state
-                # Use two backtrack calls inside an if-else because we
-                #   want to update i depending on if the sum equals target sum
-                # Add if condition and return value
-                if sum(subsets[j]) + arr[i] < target_sum:
-                    if backtrack(i + 1):
-                        return True
-                else:
-                    if backtrack(i + 1):
-                        return True
-                # Clean up choice (backtrack)
-                # i is automatically cleaned up because we 
-                # are returning to the previous execution context with previous arg
-                subsets[j].remove(arr[i])
             
-        return backtrack(0)
-
-
-# Approach that iterates through each input array index for each recursive call
-# Does not have the optimization, so all test cases won't pass
-# This is a interview-friendly solution (optimizations won't be expected in an interview)
-class Solution:
-    def canPartitionKSubsets(self, arr: List[int], k: int) -> bool:
-        arr.sort(reverse=True)
-        n, total_array_sum = len(arr), sum(arr)
-        target_sum = total_array_sum // k
-        if total_array_sum % k != 0:
+            for j in range(len(k_sums)):
+                if k_sums[j] + nums[i] <= target_sum:
+                    k_sums[j] += nums[i]
+                    if backtrack(i+1):
+                        return True
+                    k_sums[j] -= nums[i]
             return False
 
-        # Initialize state collection
-        taken = [False] * n
-        
-        # Create backtracking method
-        # State parameters: 
-        #   - count where count is the count of partitions created
-        #   - cur_sum where cur_sum is the current sum of the current partition
-        def backtrack(count, cur_sum):
-            # Check if current state is a solution
-            # If so, return True because asked if ONE solution exists
-            if count == k:
-                return True
-
-            # State is valid, so can proceed to make choice on this state
-            # Iterate through choices for current state
-            for j in range(n):
-                # Check if choice meets constraints before attempting choice
-                # If choice does not meet constraints, continue (prune)
-                if (
-                    taken[j] or
-                    cur_sum + arr[j] > target_sum
-                ):
-                    continue
-
-                # Choice meets constraints
-                # Reflect current choice in state collections
-                taken[j] = True
-                # Recurse on next choice space of next state
-                # Use two backtrack calls inside an if-else because we
-                #   want to increment count and reset cur_sum if the 
-                #   current choice finishes a partition
-                # Add if condition and return value
-                if cur_sum + arr[j] < target_sum:
-                    if backtrack(count, cur_sum + arr[j]):
-                        return True
-                else:
-                    if backtrack(count + 1, 0):
-                        return True
-                # Clean up choice (backtrack)
-                # count and cur_sum are automatically cleaned up because we 
-                # are returning to the previous execution context with previous arg
-                taken[j] = False
-            
-        return backtrack(0, 0)
-    
+        return backtrack(0)
