@@ -2,22 +2,22 @@ class Solution:
     def countArrangement(self, n: int) -> int:
         count = 0
         perm = []
-        used = [False] * (n + 1)
+        used = [False for i in range(n+1)]
 
-        def backtrack(i):
+        def backtrack():
             nonlocal count
-            if i > n:
+            if len(perm) == n:
                 count += 1
                 return
             
-            for j in range(1, n + 1):
-                if used[j]:
-                    continue
-
-                if j % i == 0 or i % j == 0:
-                    used[j] = True                
-                    backtrack(i + 1)
-                    used[j] = False
+            for i in range(1, n+1):
+                if used[i] == False:
+                    if i % (len(perm)+1) == 0 or (len(perm)+1) % i == 0:
+                        used[i] = True
+                        perm.append(i)
+                        backtrack()
+                        used[i] = False
+                        perm.pop()
         
-        backtrack(1)
+        backtrack()
         return count
