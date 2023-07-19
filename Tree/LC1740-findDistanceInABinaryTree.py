@@ -4,79 +4,28 @@
 #         self.val = val
 #         self.left = left
 #         self.right = right
-'''
-BFS
-'''
 class Solution:
     def findDistance(self, root: Optional[TreeNode], p: int, q: int) -> int:
-        adj = defaultdict(list)
-        def create_adj(cur):
-            if cur is None:
-                return
-            
-            if cur.left:
-                adj[cur.val].append(cur.left.val)
-                adj[cur.left.val].append(cur.val)
-                create_adj(cur.left)
-            if cur.right:
-                adj[cur.val].append(cur.right.val)
-                adj[cur.right.val].append(cur.val)
-                create_adj(cur.right)
-        create_adj(root)
+        lca = self.getLCA(root, p, q)
+        return self.getDist(lca, p) + self.getDist(lca, q)
 
-        dist = 0
-        vis = set([p])
-        deq = deque([p])
-        while deq:
-            for i in range(len(deq)):
-                cur = deq.popleft()
+    def getLCA(self, cur, p, q):
+        if not cur:
+            return None
 
-                if cur == q:
-                    return dist
-                
-                for nei in adj[cur]:
-                    if nei not in vis:
-                        deq.append(nei)
-                        vis.add(nei)
-            dist += 1
-
-
-'''
-DFS
-'''
-class Solution:
-    def findDistance(self, root: Optional[TreeNode], p: int, q: int) -> int:
+        if cur.val == p or cur.val == q:
+            return cur
+        left = self.getLCA(cur.left, p, q)
+        right = self.getLCA(cur.right, p, q)
+        if left and right:
+            return cur
+        if left: return left
+        if right: return right
         
-        def create_adj(cur):
-            if cur is None:
-                return
-            
-            if cur.left:
-                adj[cur.val].append(cur.left.val)
-                adj[cur.left.val].append(cur.val)
-                create_adj(cur.left)
-            if cur.right:
-                adj[cur.val].append(cur.right.val)
-                adj[cur.right.val].append(cur.val)
-                create_adj(cur.right)
-        
-        def find_dist(cur, cur_dist):
-            nonlocal dist
-            if cur == q:
-                dist = cur_dist
-                return True
-
-            cur_dist += 1
-            vis.add(cur)
-
-            for nei in adj[cur]:
-                if nei not in vis:
-                    if find_dist(nei, cur_dist): return True
-            return False
-                        
-        vis = set()
-        adj = defaultdict(list)
-        create_adj(root)
-        dist = 0
-        find_dist(p, 0)
-        return dist
+    
+    def getDist(self, cur, target):
+        if cur is None:
+            return float('inf')
+        if cur.val == target:
+            return 0
+        return 1 + min(self.getDist(cur.left, target), self.getDist(cur.right, target))
