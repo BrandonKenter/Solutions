@@ -22,7 +22,6 @@ class Solution:
         if left: return left
         if right: return right
         
-    
     def getDist(self, cur, target):
         if cur is None:
             return float('inf')
