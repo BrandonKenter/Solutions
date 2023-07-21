@@ -8,13 +8,15 @@ class Solution:
     def smallestFromLeaf(self, root: Optional[TreeNode]) -> str:
         
         def dfs(cur, path):
+            if cur is None:
+                return 'zzzzz'
+                
             c = chr(ord('a') + cur.val)
             if not cur.left and not cur.right:
                 return c + path
-            if cur.left is None:
-                return dfs(cur.right, c + path)
-            if cur.right is None:
-                return dfs(cur.left,  c + path) 
-            return min(dfs(cur.left, c + path), dfs(cur.right, c + path))
+                
+            left = dfs(cur.right, c + path)
+            right = dfs(cur.left,  c + path) 
+            return min(left, right)
         return dfs(root, '')
         
