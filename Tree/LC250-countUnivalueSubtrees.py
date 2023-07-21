@@ -13,16 +13,18 @@ class Solution:
             if not cur:
                 return True
             
-            l, r = dfs(cur.left), dfs(cur.right)
-            
-            if (
-                l and r and 
-                (not cur.left or cur.left.val == cur.val) and 
-                (not cur.right or cur.right.val == cur.val)
-            ):
+            left, right = dfs(cur.left), dfs(cur.right)
+            if left and right:
+                if (
+                    (cur.left and cur.left.val != cur.val) or
+                    (cur.right and cur.right.val != cur.val)
+                    ):
+                    return False
+
                 count += 1
                 return True
-            return False
-        
+            else:
+                return False
+            
         dfs(root)
         return count

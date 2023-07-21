@@ -3,7 +3,6 @@ Iterative
 '''
 class Solution:
     def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
-        
         while root:
             if root.val == val:
                 return root
@@ -19,15 +18,13 @@ Recursive
 '''
 class Solution:
     def searchBST(self, root: Optional[TreeNode], val: int) -> Optional[TreeNode]:
+        if root is None:
+            return None
+        if root.val == val:
+            return root
 
-        def dfs(cur):
-            if cur is None:
-                return None
-            if cur.val == val:
-                return cur
+        if val < root.val:
+            return self.searchBST(root.left, val)
+        else:
+            return self.searchBST(root.right, val)
             
-            if val < cur.val:
-                return dfs(cur.left)
-            else:
-                return dfs(cur.right)
-        return dfs(root)

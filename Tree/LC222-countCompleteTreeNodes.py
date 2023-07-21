@@ -1,24 +1,22 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 class Solution:
     def countNodes(self, root: Optional[TreeNode]) -> int:
-        if root is None:
-            return 0
-        
-        left = self.get_left_height(root)
-        right = self.get_right_height(root)
+        if not root: return 0
+        max_i = 0
 
-        if left == right: return (2 ** left) - 1
-        else: return 1 + self.countNodes(root.left) + self.countNodes(root.right)
-
-    def get_left_height(self, root):
-        height = 0
-        while root:
-            height += 1
-            root = root.left
-        return height
-
-    def get_right_height(self, root):
-        height = 0
-        while root:
-            height += 1
-            root = root.right
-        return height
+        def dfs(cur, i):
+            nonlocal max_i
+            if cur is None:
+                return
+            
+            max_i = max(max_i, i)
+            dfs(cur.left, i * 2 + 1)
+            dfs(cur.right, i * 2 + 2)
+            
+        dfs(root, 0)
+        return max_i + 1
