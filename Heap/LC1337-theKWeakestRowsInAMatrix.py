@@ -1,16 +1,17 @@
 class Solution:
     def kWeakestRows(self, mat: List[List[int]], k: int) -> List[int]:
         m, n = len(mat), len(mat[0])
-        max_h = []
+        freq = [[] for i in range(n + 1)]
         for i in range(m):
             soldiers = self.get_soldiers(n, mat[i])
-            heappush(max_h, (-soldiers, -i))
-            if len(max_h) > k:
-                heappop(max_h)
+            freq[soldiers].append(i)
         res = []
-        while max_h:
-            res.append(-1 * heappop(max_h)[1])
-        return res[::-1]
+        for i in range(len(freq)):
+            for row in freq[i]:
+                res.append(row)
+                k -= 1
+                if k == 0:
+                    return res
     
     def get_soldiers(self, n, row):
         left, right = 0, n
