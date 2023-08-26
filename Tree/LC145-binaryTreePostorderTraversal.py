@@ -9,7 +9,7 @@ class Solution:
         res = []
 
         def postorder(cur):
-            if cur is None:
+            if not cur:
                 return
             
             postorder(cur.left)
