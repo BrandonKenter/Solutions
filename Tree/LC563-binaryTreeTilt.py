@@ -1,17 +1,23 @@
+# Definition for a binary tree node.
+# class TreeNode:
+#     def __init__(self, val=0, left=None, right=None):
+#         self.val = val
+#         self.left = left
+#         self.right = right
 class Solution:
     def findTilt(self, root: Optional[TreeNode]) -> int:
-        tilt = 0
+        tiltSum = 0
 
-        def dfs(cur):
-            nonlocal tilt
+        def postorder(cur):
+            nonlocal tiltSum
             if cur is None:
                 return 0
-
-            left = dfs(cur.left)
-            right = dfs(cur.right)
-
-            node_tilt = abs(left - right)
-            tilt += node_tilt
+            
+            left = postorder(cur.left)
+            right = postorder(cur.right)
+            tiltSum += abs(left - right)
             return left + right + cur.val
-        dfs(root)
-        return tilt
+        
+        postorder(root)
+        return tiltSum
+        
