@@ -5,26 +5,26 @@
 #         self.left = left
 #         self.right = right
 class Solution:
-    def pseudoPalindromicPaths (self, root: Optional[TreeNode]) -> int:
-        path_counts = defaultdict(int)
-        pal_count = 0
+    def pseudoPalindromicPaths(self, root: Optional[TreeNode]) -> int:
+        counts = defaultdict(int)
+        palCounts = 0
 
-        def dfs(cur):
-            nonlocal pal_count
+        def preorder(cur):
+            nonlocal palCounts
             if cur is None:
                 return
             
-            path_counts[cur.val] += 1
+            counts[cur.val] += 1
             if not cur.left and not cur.right:
-                odd_count = 0
-                for val, count in path_counts.items():
-                    if count % 2: odd_count += 1
-                if odd_count <= 1:
-                    pal_count += 1
-            dfs(cur.left)
-            dfs(cur.right)
-            path_counts[cur.val] -= 1
+                oddCount = 0
+                for _, count in counts.items():
+                    if count % 2:
+                        oddCount += 1
+                if oddCount <= 1:
+                    palCounts += 1
+            preorder(cur.left)
+            preorder(cur.right)
+            counts[cur.val] -= 1
         
-        dfs(root)
-        return pal_count
-        
+        preorder(root)
+        return palCounts
