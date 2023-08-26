@@ -7,26 +7,27 @@
 class Solution:
     def isEvenOddTree(self, root: Optional[TreeNode]) -> bool:
         q = deque([root])
-        level = 0
+        curLevel = 0
+
         while q:
             prev = None
             for _ in range(len(q)):
-                cur = q.popleft()
-                if level % 2 == 0:
-                    if cur.val % 2 == 0:
+                curNode = q.popleft()
+                if curLevel % 2 == 0:
+                    if curNode.val % 2 == 0:
                         return False
-                    if prev:
-                        if prev >= cur.val:
+                    elif prev:
+                        if prev >= curNode.val:
                             return False
-                    prev = cur.val
+                    prev = curNode.val
                 else:
-                    if cur.val % 2 == 1:
+                    if curNode.val % 2 == 1:
                         return False
-                    if prev:
-                        if prev <= cur.val:
+                    elif prev:
+                        if prev <= curNode.val:
                             return False
-                    prev = cur.val
-                if cur.left: q.append(cur.left)
-                if cur.right: q.append(cur.right)
-            level += 1
+                    prev = curNode.val
+                if curNode.left: q.append(curNode.left)
+                if curNode.right: q.append(curNode.right)
+            curLevel += 1
         return True
