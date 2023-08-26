@@ -6,18 +6,18 @@
 #         self.right = right
 class Solution:
     def longestZigZag(self, root: Optional[TreeNode]) -> int:
-        maxi = 0
+        maxPathLen = 0
 
-        def max_path(cur, is_left, path_len):
-            nonlocal maxi
+        def preorder(cur, isLeft, pathLen):
+            nonlocal maxPathLen
             if cur is None:
                 return
             
-            maxi = max(maxi, path_len)
-            max_path(cur.left, True, path_len + 1 if not is_left else 1)
-            max_path(cur.right, False, path_len + 1 if is_left else 1)
+            maxPathLen = max(maxPathLen, pathLen)
+            preorder(cur.left, True, pathLen + 1 if not isLeft else 1)
+            preorder(cur.right, False, pathLen + 1 if isLeft else 1)
         
-        max_path(root.left, True, 1)
-        max_path(root.right, False, 1)
-        return maxi
+        preorder(root.left, True, 1)
+        preorder(root.right, False, 1)
+        return maxPathLen
         
