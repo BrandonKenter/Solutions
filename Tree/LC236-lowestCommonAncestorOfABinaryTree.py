@@ -8,17 +8,19 @@
 class Solution:
     def lowestCommonAncestor(self, root: 'TreeNode', p: 'TreeNode', q: 'TreeNode') -> 'TreeNode':
 
-        def dfs(cur):
+        def postorder(cur):
             if not cur:
                 return None
             if cur == p or cur == q:
                 return cur
             
-            left = dfs(cur.left)
-            right = dfs(cur.right)
+            left = postorder(cur.left)
+            right = postorder(cur.right)
             
             if left and right: return cur
             elif left: return left
             elif right: return right
-        return dfs(root)
+            else: return None
+            
+        return postorder(root)
         
