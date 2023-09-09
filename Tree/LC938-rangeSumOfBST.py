@@ -6,6 +6,18 @@
 #         self.right = right
 class Solution:
     def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
+        if not root: return 0
+        elif root.val < low:
+            return self.rangeSumBST(root.right, low, high)
+        elif root.val > high:
+            return self.rangeSumBST(root.left, low, high)
+
+        s = root.val
+        return s + self.rangeSumBST(root.left, low, high) + self.rangeSumBST(root.right, low, high) 
+
+# Alternative using inorder traversal
+class Solution:
+    def rangeSumBST(self, root: Optional[TreeNode], low: int, high: int) -> int:
         range_sum = 0
 
         def dfs(cur):
@@ -20,3 +32,4 @@ class Solution:
             dfs(cur.right)
         dfs(root)
         return range_sum
+        
