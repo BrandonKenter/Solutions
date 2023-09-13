@@ -12,3 +12,4 @@ class Solution:
             elif cur_count != count:
                 return False
         return True
+        
