@@ -6,5 +6,5 @@ class Solution:
         while True:
             k -= chalk[i%n]
             if k < 0:
-                return i%n
+                return i
             i += 1
