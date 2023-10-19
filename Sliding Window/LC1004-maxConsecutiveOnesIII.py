@@ -5,7 +5,7 @@ class Solution:
             if nums[right] == 0:
                 zeroCount += 1
             
-            while zeroCount > k:
+            if zeroCount > k:
                 if nums[left] == 0:
                     zeroCount -= 1
                 left += 1
